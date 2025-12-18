@@ -13,6 +13,7 @@ import click
 from flask.cli import with_appcontext
 from dotenv import load_dotenv
 load_dotenv()
+from flask_wtf import CSRFProtect
 
 
 app = Flask(__name__)
@@ -478,4 +479,4 @@ def logout():
 app.cli.add_command(create_superuser)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
