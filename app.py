@@ -37,6 +37,9 @@ app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")
 app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv("MAIL_DEFAULT_SENDER")
 
+app.config['BASE_URL'] = os.getenv("BASE_URL")
+
+
 # Zapier
 ZAPIER_WEBHOOK_URL = os.getenv("ZAPIER_WEBHOOK_URL")
 
@@ -296,7 +299,7 @@ def approve_request(request_id):
         
         # Generate password setup token
         token = serializer.dumps(reg_request.email, salt='password-setup')
-        setup_link = url_for('set_password', token=token, _external=True)
+        setup_link = f"{app.config['BASE_URL']}{url_for('set_password', token=token)}"
         
         # Send email
         send_approval_email(reg_request.email, setup_link)
