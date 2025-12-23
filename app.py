@@ -343,8 +343,9 @@ def send_approval_email(email, setup_link):
     """Send approval email with password setup link"""
     try:
         msg = Message(
-            'Registration Approved - Set Your Password',
-            recipients=[email]
+            subject='Registration Approved - Set Your Password',
+            recipients=[email],
+            sender=app.config['MAIL_DEFAULT_SENDER']  # ✅ FIX HERE
         )
         msg.html = f"""
         <html>
